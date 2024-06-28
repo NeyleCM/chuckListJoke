@@ -1,0 +1,78 @@
+const getJokeButton = document.getElementById('fetchJoke')
+const jokeList = document.getElementById('jokeList')
+const API = 'https://api.chucknorris.io/jokes/random'
+
+let arrayJokes = []
+// localStorage.clear()
+const fetchJoke = () => {
+
+    fetch(API)
+    .then((response) => response.json())
+    .then((data) => {
+        const {value,id} = data
+        saveData(id,value)
+    })
+    .catch((error) => console.log(error.message))
+}
+
+const template = (data) => {
+    jokeList.innerHTML = ''
+    data.forEach((item) => {
+        const {id,value} = item
+        console.log(data)
+        const li = ` <li>
+                        <h3>${value}</h3>
+                        <button id=${id} class='button'>Eliminar</button>
+                    </li>`
+    
+        jokeList.innerHTML += li
+        
+    })
+}
+
+const saveData = (id, value) => {
+    let jokes =  localStorage.getItem('jokes')
+    const joke = {id,value}
+    let array = jokes ? JSON.parse(jokes) : []
+    array.push(joke)
+
+    localStorage.setItem('jokes', JSON.stringify(array))
+    template(array)
+   
+}
+
+const loadJokes = () => {
+    const jokes = localStorage.getItem('jokes')
+
+    if (jokes) {
+    const data =  JSON.parse(jokes)
+    template(data)
+    }else{
+        console.log('Vacio');
+    }
+    
+}
+
+const removeItem = (itemId) =>{
+    let array = JSON.parse(localStorage.getItem('jokes'))
+    const filteredArray = array.filter(item => item.id !== itemId)
+    
+    localStorage.setItem('jokes', JSON.stringify(filteredArray))
+    
+    template(filteredArray)
+    
+    
+}
+
+jokeList.addEventListener('click', (event)=> {
+    console.log()
+    if (event.target.classList.contains('button')) {
+        removeItem(event.target.id)
+    }
+})
+
+getJokeButton.addEventListener('click', fetchJoke)
+
+
+
+window.addEventListener('load',loadJokes)

@@ -28,17 +28,17 @@ Podrías ser algo como esto:
 ## Pistas e ideas
 
 La idea podría ser la siguiente 
-- Manejador de click en el botón "Obtener Chiste"
-- Una función para obtener un chiste de Chuck Norris desde la API
-- Una función para renderizar la lista de chistes en el DOM
-- Una función para guardar la lista de chistes en localStorage
-- Una función para cargar la lista de chistes desde localStorage
+- Manejador de click en el botón "Obtener Chiste" listo
+- Una función para obtener un chiste de Chuck Norris desde la API listo
+- Una función para guardar la lista de chistes en localStorage listo
+- Una función para renderizar la lista de chistes en el DOM listo
+- Una función para cargar la lista de chistes desde localStorage listo
 
 revisar si fuera necesario `JSON.stringify` y `JSON.parse` para los datos del localStorage
 
 ## BONUS
 Como BONUS crear un botón para eliminar todos los elementos a la vez y/o un botón para eliminar uno a uno el elemento seleccionado 
-- Manejador de click en los botones de eliminación (se eliminará desde el local storage como del DOM)
+- Manejador de click en los botones de eliminación (se eliminará desde el local storage como del DOM) listo
 
 ## API Utilizada
 
