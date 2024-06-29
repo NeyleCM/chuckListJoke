@@ -1,7 +1,7 @@
 
 const fetchJoke = document.getElementById('fetchJoke')
 const ulContainer = document.getElementById('jokeList')
-
+const removeAllButton = document.getElementById('eliminar')
 const API = `https://api.chucknorris.io/jokes/random`
 //peticion API
 const getJoke = () => {
@@ -13,6 +13,7 @@ const getJoke = () => {
 
 //Function 
 const saveJoke = (data) => {
+    
     const joke = localStorage.getItem('joke') // en la primera vuelta no existe, en la segunda si.
     
     const array = joke ? JSON.parse(joke) : [] // nos queda un array vacio en la primera.
@@ -27,8 +28,8 @@ const saveJoke = (data) => {
 }
 //funcion para crear item list 
 const template = (data) => {
+    
     const itemsToTemplate = JSON.parse(data)//Aqui lo convertir data en un array de objetos para recorrerlo.
-
     
     const allListItems = itemsToTemplate.map((item) => {
         const {value,id} = item //usamos en destructiring para sacar el value y id.
@@ -41,6 +42,7 @@ const template = (data) => {
 
 //FUNCTION para renderizar los elementos de la variable localStorage, si existe.
 const loadJoke = () =>{
+    
     const jokesToLoad = localStorage.getItem('joke') // para amacenar los valores que tiene localStorage
     
     jokesToLoad ? template(jokesToLoad) : null
@@ -66,9 +68,13 @@ const removeItem = (itemId) => {
 
     template(localStorage.getItem('joke'))//Invocamos template(), para renderizar con localStorage actualizado.
 }
-
+const removeAll = () => {
+    
+    localStorage.setItem('joke','[]')
+    
+    template(localStorage.getItem('joke'))
+   
+}
 fetchJoke.addEventListener('click', getJoke)//Fetch data a la API
-
+removeAllButton.addEventListener('click',removeAll)
 window.addEventListener('load',loadJoke)//Cuando se cargue toda la pagina, me llama a la function loadJoke para renderizar los itemsList 
-
- 
